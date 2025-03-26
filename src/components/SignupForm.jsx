@@ -1,6 +1,6 @@
 import { Form, Row, Col, Button } from "react-bootstrap";
 import useForm from "../hooks/useForm";
-import { createUser } from "../../axios/UserAxios";
+import { createUser } from "../axios/UserAxios";
 const SignupForm = () => {
   const initialFormData = {
     name: "",
@@ -10,9 +10,9 @@ const SignupForm = () => {
   const { formData, handleOnChange } = useForm(initialFormData);
   const { name, email, password } = formData;
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
-    const response = createUser(formData);
+    const response = await createUser(formData);
     console.log(response);
   };
 

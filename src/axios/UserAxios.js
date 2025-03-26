@@ -20,3 +20,15 @@ export const loginUser = (userObject) => {
     .catch((error) => console.log(error));
   return response;
 };
+
+// VERIFY USER | PATCH
+export const verifyUser = async ({ email, token }) => {
+  const response = await axios
+    .patch(`${API_URL}${API_ENDPOINT}/verify-user`, {
+      email,
+      token,
+    })
+    .then((res) => res.data)
+    .catch((error) => console.log(error));
+  return response;
+};

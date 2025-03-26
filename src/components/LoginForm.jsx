@@ -1,6 +1,6 @@
 import { Form, Row, Col, Button } from "react-bootstrap";
 import useForm from "../hooks/useForm";
-import { loginUser } from "../../axios/UserAxios";
+import { loginUser } from "../axios/UserAxios";
 const LoginForm = () => {
   const initialFormData = {
     name: "",
