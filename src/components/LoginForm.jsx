@@ -1,5 +1,6 @@
 import { Form, Row, Col, Button } from "react-bootstrap";
 import useForm from "../hooks/useForm";
+import { loginUser } from "../../axios/UserAxios";
 const LoginForm = () => {
   const initialFormData = {
     name: "",
@@ -9,7 +10,11 @@ const LoginForm = () => {
   const { formData, handleOnChange } = useForm(initialFormData);
   const { email, password } = formData;
 
-  const handleOnSubmit = () => {};
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    const response = loginUser(formData);
+    console.log(response);
+  };
 
   return (
     <Form onSubmit={handleOnSubmit}>

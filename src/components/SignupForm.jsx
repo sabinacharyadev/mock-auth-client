@@ -1,5 +1,6 @@
 import { Form, Row, Col, Button } from "react-bootstrap";
 import useForm from "../hooks/useForm";
+import { createUser } from "../../axios/UserAxios";
 const SignupForm = () => {
   const initialFormData = {
     name: "",
@@ -9,7 +10,11 @@ const SignupForm = () => {
   const { formData, handleOnChange } = useForm(initialFormData);
   const { name, email, password } = formData;
 
-  const handleOnSubmit = () => {};
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    const response = createUser(formData);
+    console.log(response);
+  };
 
   return (
     <Form onSubmit={handleOnSubmit}>
@@ -22,6 +27,7 @@ const SignupForm = () => {
             onChange={handleOnChange}
             name="name"
             value={name}
+            required
           />
         </Col>
       </Form.Group>
@@ -35,6 +41,7 @@ const SignupForm = () => {
             onChange={handleOnChange}
             name="email"
             value={email}
+            required
           />
         </Col>
       </Form.Group>
@@ -48,6 +55,7 @@ const SignupForm = () => {
             onChange={handleOnChange}
             name="password"
             value={password}
+            required
           />
         </Col>
       </Form.Group>
