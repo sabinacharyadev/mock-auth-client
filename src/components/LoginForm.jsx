@@ -1,7 +1,12 @@
 import { Form, Row, Col, Button } from "react-bootstrap";
 import useForm from "../hooks/useForm";
-import { getUser, loginUser } from "../axios/UserAxios";
+import { loginUser } from "../axios/UserAxios";
+import { useDispatch } from "react-redux";
+import { getUserAction } from "../redux/userAction";
+import { useNavigate } from "react-router";
 const LoginForm = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const initialFormData = {
     name: "",
     email: "",
@@ -10,16 +15,11 @@ const LoginForm = () => {
   const { formData, handleOnChange } = useForm(initialFormData);
   const { email, password } = formData;
 
-  const getUserInfo = async (token) => {
-    const response = await getUser(token);
-    console.log(response);
-  };
-
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     const response = await loginUser(formData);
-
-    getUserInfo(response.data);
+    dispatch(getUserAction(response.data));
+    navigate("/dashboard");
   };
 
   return (
