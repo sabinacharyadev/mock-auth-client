@@ -9,8 +9,9 @@ const Header = () => {
         <Navbar.Brand href="#home">Auth System</Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
+          <Navbar.Text className="mx-2">Signed in as:{user.name}</Navbar.Text>
           <Navbar.Text>
-            Signed in as: <a href="#login">{user.name}</a>
+            <a href="#login">Logout</a>
           </Navbar.Text>
         </Navbar.Collapse>
       </Container>

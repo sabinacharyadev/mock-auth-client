@@ -1,12 +1,14 @@
 import { Form, Row, Col, Button } from "react-bootstrap";
 import useForm from "../hooks/useForm";
 import { loginUser } from "../axios/UserAxios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getUserAction } from "../redux/userAction";
 import { useNavigate } from "react-router";
+import { useEffect } from "react";
 const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { user } = useSelector((state) => state.users);
   const initialFormData = {
     name: "",
     email: "",
@@ -14,6 +16,10 @@ const LoginForm = () => {
   };
   const { formData, handleOnChange } = useForm(initialFormData);
   const { email, password } = formData;
+
+  useEffect(() => {
+    if (user._id) navigate("/dashboard");
+  }, [navigate, user._id]);
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
