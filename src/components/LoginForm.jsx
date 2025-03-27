@@ -10,9 +10,9 @@ const LoginForm = () => {
   const { formData, handleOnChange } = useForm(initialFormData);
   const { email, password } = formData;
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
-    const response = loginUser(formData);
+    const response = await loginUser(formData);
     console.log(response);
   };
 

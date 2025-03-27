@@ -13,8 +13,8 @@ export const createUser = async (userObject) => {
 };
 
 // LOGIN USER | POST
-export const loginUser = (userObject) => {
-  const response = axios
+export const loginUser = async (userObject) => {
+  const response = await axios
     .post(`${API_URL}${API_ENDPOINT}/login`, userObject)
     .then((res) => res.data)
     .catch((error) => console.log(error));
