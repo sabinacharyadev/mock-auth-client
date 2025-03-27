@@ -18,13 +18,18 @@ const LoginForm = () => {
   const { email, password } = formData;
 
   useEffect(() => {
-    if (user._id) navigate("/dashboard");
-  }, [navigate, user._id]);
+    !user._id
+      ? dispatch(getUserAction(sessionStorage.getItem("accessToken")))
+      : navigate("/dashboard");
+  }, [dispatch, navigate, user._id]);
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     const response = await loginUser(formData);
-    dispatch(getUserAction(response.data));
+    dispatch(getUserAction(response.data.accessToken));
+
+    sessionStorage.setItem("accessToken", response.data.accessToken);
+
     navigate("/dashboard");
   };
 

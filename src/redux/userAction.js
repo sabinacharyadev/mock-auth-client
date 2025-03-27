@@ -7,6 +7,9 @@ export const getUserAction = (token) => async (dispatch) => {
     if (response.status === "success") {
       dispatch(getUsers(response.data));
     }
+    if (response.status === "error") {
+      dispatch(getUsers({}));
+    }
   } catch (error) {
     console.log(error);
   }
