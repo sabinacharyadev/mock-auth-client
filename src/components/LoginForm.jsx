@@ -1,6 +1,6 @@
 import { Form, Row, Col, Button } from "react-bootstrap";
 import useForm from "../hooks/useForm";
-import { loginUser } from "../axios/UserAxios";
+import { getUser, loginUser } from "../axios/UserAxios";
 const LoginForm = () => {
   const initialFormData = {
     name: "",
@@ -10,10 +10,16 @@ const LoginForm = () => {
   const { formData, handleOnChange } = useForm(initialFormData);
   const { email, password } = formData;
 
+  const getUserInfo = async (token) => {
+    const response = await getUser(token);
+    console.log(response);
+  };
+
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     const response = await loginUser(formData);
-    console.log(response);
+
+    getUserInfo(response.data);
   };
 
   return (

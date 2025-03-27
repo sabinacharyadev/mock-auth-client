@@ -32,3 +32,15 @@ export const verifyUser = async ({ email, token }) => {
     .catch((error) => console.log(error));
   return response;
 };
+
+// GET USER | INDEX
+export const getUser = async (accessToken) => {
+  return await axios
+    .get(`${API_URL}${API_ENDPOINT}`, {
+      headers: {
+        Authorization: accessToken,
+      },
+    })
+    .then((res) => res.data)
+    .catch((error) => console.log(error));
+};
