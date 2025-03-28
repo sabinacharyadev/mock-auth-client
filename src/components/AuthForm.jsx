@@ -10,7 +10,7 @@ const AuthForm = () => {
       {isLoginForm && <LoginForm />}
       {!isLoginForm && <SignupForm />}
       {isLoginForm && (
-        <p>
+        <p className="mt-4">
           Not a member with us?{" "}
           <Button
             variant="link"
@@ -24,7 +24,7 @@ const AuthForm = () => {
         </p>
       )}
       {!isLoginForm && (
-        <p>
+        <p className="mt-4">
           Already a member with us?{" "}
           <Button
             variant="link"
