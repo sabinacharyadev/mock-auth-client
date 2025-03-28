@@ -45,6 +45,7 @@ const LoginForm = () => {
             onChange={handleOnChange}
             name="email"
             value={email}
+            required
           />
         </Col>
       </Form.Group>
@@ -58,6 +59,7 @@ const LoginForm = () => {
             onChange={handleOnChange}
             name="password"
             value={password}
+            required
           />
         </Col>
       </Form.Group>
