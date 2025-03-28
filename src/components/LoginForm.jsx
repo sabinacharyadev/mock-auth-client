@@ -34,7 +34,7 @@ const LoginForm = () => {
     <Form onSubmit={handleOnSubmit}>
       <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
         <Form.Label>Email</Form.Label>
-        <Col sm="10">
+        <Col>
           <Form.Control
             type="text"
             placeholder="Email"
@@ -46,8 +46,8 @@ const LoginForm = () => {
       </Form.Group>
 
       <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-        <Form.Label column>Password</Form.Label>
-        <Col sm="10">
+        <Form.Label>Password</Form.Label>
+        <Col>
           <Form.Control
             type="password"
             placeholder="Password"
