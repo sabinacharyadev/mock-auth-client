@@ -1,13 +1,12 @@
 import { Navbar, Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router";
 import { getUserAction } from "../redux/userAction";
 const Header = () => {
   const { user } = useSelector((state) => state.users);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleOnClick = () => {
-    sessionStorage.setItem("accessToken", null);
+    sessionStorage.setItem("accessToken", "");
+    localStorage.setItem("refreshToken", "");
     dispatch(getUserAction(sessionStorage.getItem("accessToken")));
   };
   return (

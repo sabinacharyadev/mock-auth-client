@@ -2,7 +2,7 @@ import { Form, Row, Col, Button } from "react-bootstrap";
 import useForm from "../hooks/useForm";
 import { loginUser } from "../axios/UserAxios";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserAction } from "../redux/userAction";
+import { autoLoginAction, getUserAction } from "../redux/userAction";
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
 const LoginForm = () => {
@@ -18,9 +18,7 @@ const LoginForm = () => {
   const { email, password } = formData;
 
   useEffect(() => {
-    !user._id
-      ? dispatch(getUserAction(sessionStorage.getItem("accessToken")))
-      : navigate("/dashboard");
+    !user._id ? dispatch(autoLoginAction()) : navigate("/dashboard");
   }, [dispatch, navigate, user._id]);
 
   const handleOnSubmit = async (e) => {
@@ -29,8 +27,7 @@ const LoginForm = () => {
     dispatch(getUserAction(response.data.accessToken));
 
     sessionStorage.setItem("accessToken", response.data.accessToken);
-
-    navigate("/dashboard");
+    localStorage.setItem("refreshToken", response.data.refreshToken);
   };
 
   return (

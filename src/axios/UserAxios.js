@@ -44,3 +44,15 @@ export const getUser = async (accessToken) => {
     .then((res) => res.data)
     .catch((error) => console.log(error));
 };
+
+// GET ACCESS TOKEN
+export const getAccessToken = async (refreshToken) => {
+  return await axios
+    .get(`${API_URL}${API_ENDPOINT}/accessToken`, {
+      headers: {
+        Authorization: refreshToken,
+      },
+    })
+    .then((res) => res.data)
+    .catch((error) => console.log(error));
+};
