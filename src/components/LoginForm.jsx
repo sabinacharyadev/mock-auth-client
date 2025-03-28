@@ -1,14 +1,16 @@
-import { Form, Row, Col, Button } from "react-bootstrap";
+import { Form, Row, Col, Button, Spinner } from "react-bootstrap";
 import useForm from "../hooks/useForm";
 import { loginUser } from "../axios/UserAxios";
 import { useDispatch, useSelector } from "react-redux";
 import { autoLoginAction, getUserAction } from "../redux/userAction";
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
+import { useLoader } from "../hooks/useLoader";
 const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.users);
+  const { isLoading, startLoading, stopLoading } = useLoader(false);
   const initialFormData = {
     name: "",
     email: "",
@@ -23,8 +25,10 @@ const LoginForm = () => {
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
+    startLoading();
     const response = await loginUser(formData);
     dispatch(getUserAction(response.data.accessToken));
+    stopLoading();
 
     sessionStorage.setItem("accessToken", response.data.accessToken);
     localStorage.setItem("refreshToken", response.data.refreshToken);
@@ -57,7 +61,12 @@ const LoginForm = () => {
           />
         </Col>
       </Form.Group>
-      <Button type="submit">Login</Button>
+      {isLoading && (
+        <Button type="submit" disabled>
+          Login <Spinner></Spinner>
+        </Button>
+      )}
+      {!isLoading && <Button type="submit">Login </Button>}
     </Form>
   );
 };
