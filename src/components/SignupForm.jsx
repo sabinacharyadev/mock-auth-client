@@ -1,7 +1,10 @@
 import { Form, Row, Col, Button } from "react-bootstrap";
 import useForm from "../hooks/useForm";
 import { createUser } from "../axios/UserAxios";
+import { useLoader } from "../hooks/useLoader";
 const SignupForm = () => {
+  const { isLoading, startLoading, stopLoading } = useLoader(false);
+
   const initialFormData = {
     name: "",
     email: "",
@@ -12,8 +15,10 @@ const SignupForm = () => {
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
+    startLoading();
     const response = await createUser(formData);
     console.log(response);
+    stopLoading();
   };
 
   return (
@@ -59,7 +64,12 @@ const SignupForm = () => {
           />
         </Col>
       </Form.Group>
-      <Button type="submit">Signup</Button>
+      {isLoading && (
+        <Button type="submit" disabled>
+          Signup <Spinner></Spinner>
+        </Button>
+      )}
+      {!isLoading && <Button type="submit">Signup </Button>}
     </Form>
   );
 };
